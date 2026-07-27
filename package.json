@@ -1,0 +1,10 @@
+{
+  "name": "nikki-countdown",
+  "version": "1.0.0",
+  "description": "A cute live countdown to our next hangout 💕",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@upstash/redis": "^1.34.3"
+  }
+}
