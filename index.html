@@ -73,14 +73,18 @@
     .subhead { font-size: clamp(13px, 3.6vw, 15px); font-weight: 700; color: var(--ink-soft); margin: 6px 0 20px; }
 
     /* Countdown */
-    /* one chunky box; the four units are internal segments split by ink dividers */
-    .countdown { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-bottom: 22px; border: 3px solid var(--ink); border-radius: 22px; overflow: hidden; box-shadow: 0 5px 0 var(--shadow-ink); background: #fff; }
-    .unit { padding: clamp(12px,3.2vw,16px) 2px; }
-    .unit + .unit { border-left: 3px solid var(--ink); }
-    .unit:nth-child(1) { background: var(--pink-soft); }
-    .unit:nth-child(2) { background: var(--mint-soft); }
-    .unit:nth-child(3) { background: var(--yellow-soft); }
-    .unit:nth-child(4) { background: var(--periwinkle-soft); }
+    /* one chunky box; candy tints blend seamlessly across it */
+    .countdown {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-bottom: 22px;
+      border: 3px solid var(--ink); border-radius: 22px; overflow: hidden;
+      box-shadow: 0 5px 0 var(--shadow-ink);
+      background: linear-gradient(90deg,
+        var(--pink-soft) 0%, var(--pink-soft) 12%,
+        var(--mint-soft) 38%,
+        var(--yellow-soft) 62%,
+        var(--periwinkle-soft) 88%, var(--periwinkle-soft) 100%);
+    }
+    .unit { padding: clamp(12px,3.2vw,16px) 2px; background: transparent; }
     .unit .num { font-family: var(--display); font-weight: 800; font-variant-numeric: tabular-nums; font-size: clamp(26px, 9vw, 42px); color: var(--accent-deep); display: block; line-height: 1; }
     .unit .lbl { font-size: clamp(8.5px, 2.4vw, 10px); font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-soft); margin-top: 7px; display: block; }
 
