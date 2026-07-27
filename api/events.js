@@ -20,7 +20,7 @@ const MAX_EVENTS = 200; // sanity cap
 const DEFAULT_SETTINGS = {
   names: { a: "Nikki", b: "Nate" },
   timezone: "America/Los_Angeles",
-  accent: "#f7638c",
+  accent: "#ff5fa8",
 };
 
 function sanitizeString(value, max) {
