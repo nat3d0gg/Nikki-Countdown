@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#f7b7c8" />
-  <title>Nikki & Me 💕</title>
+  <title>Nikki &amp; Nate 💕</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💕</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
       --blush:    #ffd7e4;
@@ -27,48 +27,30 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     html, body { height: 100%; }
 
     body {
       font-family: var(--body);
       color: var(--ink);
       min-height: 100dvh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: max(20px, env(safe-area-inset-top)) 20px max(20px, env(safe-area-inset-bottom));
       background: linear-gradient(160deg, #ffe3ee 0%, #ffe9de 38%, #f0e4ff 100%);
       background-attachment: fixed;
       overflow-x: hidden;
       position: relative;
       -webkit-font-smoothing: antialiased;
+      padding: max(18px, env(safe-area-inset-top)) 16px calc(96px + env(safe-area-inset-bottom));
     }
 
-    /* soft floating blobs in the background */
     .blob {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(48px);
-      opacity: 0.55;
-      z-index: 0;
-      pointer-events: none;
-      animation: drift 18s ease-in-out infinite;
+      position: fixed; border-radius: 50%; filter: blur(48px);
+      opacity: 0.5; z-index: 0; pointer-events: none; animation: drift 18s ease-in-out infinite;
     }
     .blob.b1 { width: 340px; height: 340px; background: var(--pink);     top: -80px;  left: -80px; }
     .blob.b2 { width: 300px; height: 300px; background: var(--lavender); bottom: -90px; right: -70px; animation-delay: -6s; }
     .blob.b3 { width: 240px; height: 240px; background: var(--peach);    top: 40%;    right: -120px; animation-delay: -11s; }
-    @keyframes drift {
-      0%,100% { transform: translate(0,0) scale(1); }
-      50%     { transform: translate(20px, -24px) scale(1.08); }
-    }
+    @keyframes drift { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(20px,-24px) scale(1.08); } }
 
-    .wrap {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      max-width: 620px;
-    }
+    .wrap { position: relative; z-index: 1; width: 100%; max-width: 640px; margin: 0 auto; }
 
     .card {
       position: relative;
@@ -76,310 +58,199 @@
       backdrop-filter: blur(18px) saturate(140%);
       -webkit-backdrop-filter: blur(18px) saturate(140%);
       border: 1px solid var(--card-brd);
-      border-radius: 32px;
+      border-radius: 30px;
       box-shadow: var(--shadow);
-      padding: clamp(26px, 6vw, 48px);
-      text-align: center;
+      padding: clamp(22px, 5.5vw, 42px);
       overflow: hidden;
     }
+    .card + .card { margin-top: 16px; }
+
+    .center { text-align: center; }
 
     .eyebrow {
-      font-family: var(--body);
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      font-size: clamp(11px, 3vw, 13px);
-      color: var(--pink-deep);
-      margin-bottom: 6px;
-      padding: 0 46px; /* clear the edit pencil on narrow screens */
+      font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      font-size: clamp(11px, 3vw, 13px); color: var(--pink-deep); margin-bottom: 6px;
     }
-
     .names {
-      font-family: var(--display);
-      font-weight: 600;
-      font-size: clamp(26px, 8vw, 40px);
-      line-height: 1.1;
-      color: var(--ink);
-      margin-bottom: 4px;
+      font-family: var(--display); font-weight: 600;
+      font-size: clamp(26px, 8vw, 40px); line-height: 1.1; color: var(--ink); margin-bottom: 4px;
     }
     .names .amp { color: var(--pink-deep); }
-
-    .subhead {
-      font-size: clamp(13px, 3.6vw, 16px);
-      color: var(--ink-soft);
-      margin-bottom: clamp(20px, 5vw, 30px);
-    }
+    .subhead { font-size: clamp(13px, 3.6vw, 16px); color: var(--ink-soft); margin-bottom: clamp(20px, 5vw, 30px); }
 
     /* ---- Countdown ---- */
-    .countdown {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: clamp(8px, 2.4vw, 16px);
-      margin-bottom: clamp(22px, 5vw, 32px);
-    }
-    .unit {
-      background: rgba(255,255,255,0.6);
-      border: 1px solid rgba(255,255,255,0.85);
-      border-radius: 20px;
-      padding: clamp(12px, 3vw, 20px) 4px;
-      box-shadow: 0 8px 22px rgba(214,108,140,0.14);
-    }
-    .unit .num {
-      font-family: var(--display);
-      font-weight: 700;
-      font-variant-numeric: tabular-nums;
-      font-size: clamp(30px, 11vw, 58px);
-      line-height: 1;
-      color: var(--pink-deep);
-      display: block;
-    }
-    .unit .lbl {
-      font-size: clamp(9px, 2.6vw, 12px);
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--ink-soft);
-      margin-top: 8px;
-    }
+    .countdown { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(8px, 2.4vw, 16px); margin-bottom: clamp(22px, 5vw, 30px); }
+    .unit { background: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.85); border-radius: 20px; padding: clamp(12px,3vw,20px) 4px; box-shadow: 0 8px 22px rgba(214,108,140,0.14); }
+    .unit .num { font-family: var(--display); font-weight: 700; font-variant-numeric: tabular-nums; font-size: clamp(30px,11vw,58px); line-height: 1; color: var(--pink-deep); display: block; }
+    .unit .lbl { font-size: clamp(9px,2.6vw,12px); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); margin-top: 8px; }
 
-    /* ---- Event details ---- */
-    .details { margin-top: 4px; }
-    .activity {
-      font-family: var(--display);
-      font-weight: 600;
-      font-size: clamp(20px, 6vw, 30px);
-      color: var(--ink);
-      margin-bottom: 8px;
-      overflow-wrap: anywhere;
+    .activity { font-family: var(--display); font-weight: 600; font-size: clamp(20px,6vw,30px); color: var(--ink); margin-bottom: 10px; overflow-wrap: anywhere; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 12px; }
+    .chip {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(255,255,255,0.55); border: 1px solid rgba(255,255,255,0.8);
+      color: var(--ink); font-weight: 600; font-size: clamp(12.5px,3.4vw,15px);
+      padding: 7px 14px; border-radius: 999px; overflow-wrap: anywhere; text-align: left;
     }
-    .when {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255,255,255,0.55);
-      border: 1px solid rgba(255,255,255,0.8);
-      color: var(--ink);
-      font-weight: 600;
-      font-size: clamp(13px, 3.6vw, 16px);
-      padding: 8px 16px;
-      border-radius: 999px;
-      margin-bottom: 14px;
-    }
-    .note {
-      font-size: clamp(14px, 3.8vw, 17px);
-      color: var(--ink-soft);
-      font-style: italic;
-      overflow-wrap: anywhere;
-    }
+    .note { font-size: clamp(14px,3.8vw,17px); color: var(--ink-soft); font-style: italic; overflow-wrap: anywhere; }
     .note:empty { display: none; }
 
-    /* ---- Celebration ---- */
-    .celebrate .big-emoji {
-      font-size: clamp(60px, 22vw, 110px);
-      line-height: 1;
-      animation: pop 1.1s ease-in-out infinite alternate;
-    }
-    @keyframes pop {
-      from { transform: scale(1) rotate(-4deg); }
-      to   { transform: scale(1.12) rotate(4deg); }
-    }
-    .celebrate .celebrate-title {
-      font-family: var(--display);
-      font-weight: 700;
-      font-size: clamp(30px, 9vw, 52px);
-      color: var(--pink-deep);
-      margin: 14px 0 8px;
-    }
-    .celebrate .celebrate-sub {
-      font-size: clamp(15px, 4vw, 19px);
-      color: var(--ink-soft);
-      margin-bottom: 6px;
-    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px; }
 
-    /* ---- Waiting / empty ---- */
-    .waiting .big-emoji { font-size: clamp(54px, 18vw, 92px); line-height: 1; }
-    .waiting .waiting-title {
-      font-family: var(--display);
-      font-weight: 600;
-      font-size: clamp(22px, 6vw, 32px);
-      color: var(--ink);
-      margin: 14px 0 8px;
-    }
-    .waiting .waiting-sub {
-      font-size: clamp(14px, 3.8vw, 17px);
-      color: var(--ink-soft);
-      margin-bottom: 22px;
-    }
+    /* ---- Celebration ---- */
+    .celebrate .big-emoji { font-size: clamp(60px,22vw,110px); line-height: 1; animation: pop 1.1s ease-in-out infinite alternate; }
+    @keyframes pop { from { transform: scale(1) rotate(-4deg); } to { transform: scale(1.12) rotate(4deg); } }
+    .celebrate .celebrate-title { font-family: var(--display); font-weight: 700; font-size: clamp(30px,9vw,52px); color: var(--pink-deep); margin: 14px 0 8px; }
+    .celebrate .celebrate-sub { font-size: clamp(15px,4vw,19px); color: var(--ink-soft); margin-bottom: 6px; }
+
+    /* ---- Waiting ---- */
+    .waiting .big-emoji { font-size: clamp(54px,18vw,92px); line-height: 1; }
+    .waiting .waiting-title { font-family: var(--display); font-weight: 600; font-size: clamp(22px,6vw,32px); color: var(--ink); margin: 14px 0 8px; }
+    .waiting .waiting-sub { font-size: clamp(14px,3.8vw,17px); color: var(--ink-soft); margin-bottom: 22px; }
 
     /* ---- Buttons ---- */
-    .btn {
-      font-family: var(--body);
-      font-weight: 600;
-      font-size: 16px;
-      border: none;
-      border-radius: 999px;
-      padding: 13px 26px;
-      cursor: pointer;
-      transition: transform 0.12s ease, box-shadow 0.2s ease, opacity 0.2s ease;
-    }
+    .btn { font-family: var(--body); font-weight: 700; font-size: 15px; border: none; border-radius: 999px; padding: 12px 22px; cursor: pointer; transition: transform 0.12s ease, box-shadow 0.2s ease, opacity 0.2s ease; display: inline-flex; align-items: center; gap: 8px; }
     .btn:active { transform: scale(0.96); }
-    .btn-primary {
-      background: linear-gradient(135deg, var(--pink) 0%, var(--pink-deep) 100%);
-      color: #fff;
-      box-shadow: 0 10px 24px rgba(247,99,140,0.4);
-    }
-    .btn-ghost {
-      background: rgba(255,255,255,0.6);
-      color: var(--ink);
-      border: 1px solid rgba(255,255,255,0.85);
-    }
+    .btn:disabled { opacity: 0.6; cursor: default; }
+    .btn-primary { background: linear-gradient(135deg, var(--pink) 0%, var(--pink-deep) 100%); color: #fff; box-shadow: 0 10px 24px rgba(247,99,140,0.4); }
+    .btn-ghost { background: rgba(255,255,255,0.65); color: var(--ink); border: 1px solid rgba(255,255,255,0.85); }
+    .btn-danger { background: rgba(255,255,255,0.65); color: var(--pink-deep); border: 1px solid rgba(247,99,140,0.35); }
+    .btn-sm { padding: 9px 15px; font-size: 13px; }
 
-    /* edit pencil */
-    .edit-fab {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      background: rgba(255,255,255,0.6);
-      border: 1px solid rgba(255,255,255,0.85);
-      cursor: pointer;
-      z-index: 3;
-      transition: transform 0.15s ease, background 0.2s ease;
-      font-size: 18px;
+    /* ---- View headers ---- */
+    .view-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 16px; }
+    .view-title { font-family: var(--display); font-weight: 600; font-size: clamp(20px,5.5vw,26px); color: var(--ink); }
+
+    /* ---- Calendar ---- */
+    .cal-nav { display: flex; align-items: center; gap: 8px; }
+    .cal-nav .icon-btn { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,0.65); border: 1px solid rgba(255,255,255,0.85); cursor: pointer; font-size: 16px; color: var(--ink); }
+    .cal-month-label { font-family: var(--display); font-weight: 600; font-size: 17px; min-width: 148px; text-align: center; color: var(--ink); }
+
+    .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
+    .cal-dow { text-align: center; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); padding-bottom: 4px; }
+    .cal-cell {
+      position: relative; aspect-ratio: 1 / 1; border-radius: 14px;
+      background: rgba(255,255,255,0.4); border: 1px solid rgba(255,255,255,0.5);
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+      padding-top: 6px; cursor: pointer; transition: transform 0.1s ease, background 0.15s ease; font-size: 13px; color: var(--ink);
     }
-    .edit-fab:hover { transform: rotate(-12deg) scale(1.06); background: rgba(255,255,255,0.85); }
+    .cal-cell:active { transform: scale(0.94); }
+    .cal-cell.empty { background: transparent; border-color: transparent; cursor: default; }
+    .cal-cell.today { background: rgba(255,143,171,0.22); border-color: var(--pink); font-weight: 700; }
+    .cal-cell.has-events { background: rgba(255,255,255,0.72); }
+    .cal-cell .dnum { line-height: 1; }
+    .cal-dots { position: absolute; bottom: 6px; display: flex; gap: 3px; }
+    .cal-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--pink-deep); }
+
+    .cal-legend { font-size: 12px; color: var(--ink-soft); margin-top: 12px; text-align: center; }
+
+    /* ---- Event list ---- */
+    .evlist { display: flex; flex-direction: column; gap: 10px; }
+    .ev-empty { text-align: center; color: var(--ink-soft); font-size: 14px; padding: 18px 0; }
+    .ev-item {
+      display: flex; gap: 12px; align-items: stretch; text-align: left;
+      background: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.8);
+      border-radius: 18px; padding: 12px 14px; cursor: pointer; transition: transform 0.1s ease, box-shadow 0.15s ease;
+    }
+    .ev-item:hover { box-shadow: 0 8px 20px rgba(214,108,140,0.16); }
+    .ev-item:active { transform: scale(0.99); }
+    .ev-date { flex: 0 0 auto; width: 52px; text-align: center; border-right: 1px solid rgba(214,108,140,0.18); padding-right: 10px; }
+    .ev-date .m { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--pink-deep); }
+    .ev-date .d { font-family: var(--display); font-weight: 700; font-size: 22px; line-height: 1.05; color: var(--ink); }
+    .ev-date .dow { font-size: 10px; color: var(--ink-soft); text-transform: uppercase; }
+    .ev-main { min-width: 0; flex: 1; }
+    .ev-main .t { font-weight: 700; color: var(--ink); overflow-wrap: anywhere; }
+    .ev-main .meta { font-size: 12.5px; color: var(--ink-soft); margin-top: 2px; overflow-wrap: anywhere; }
+    .ev-main .meta .sep { opacity: 0.5; margin: 0 5px; }
+    .ev-past { opacity: 0.62; }
+
+    /* ---- Bottom nav ---- */
+    .navbar {
+      position: fixed; left: 50%; transform: translateX(-50%);
+      bottom: calc(14px + env(safe-area-inset-bottom));
+      z-index: 60; display: flex; gap: 4px;
+      background: rgba(255,255,255,0.72); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.85); border-radius: 999px; padding: 6px;
+      box-shadow: 0 14px 40px rgba(214,108,140,0.3);
+    }
+    .navbtn {
+      border: none; background: transparent; cursor: pointer; color: var(--ink-soft);
+      font-family: var(--body); font-weight: 700; font-size: 12px;
+      padding: 8px 16px; border-radius: 999px; display: flex; flex-direction: column; align-items: center; gap: 2px; transition: color 0.15s ease, background 0.15s ease;
+    }
+    .navbtn .ico { font-size: 18px; }
+    .navbtn.active { color: #fff; background: linear-gradient(135deg, var(--pink) 0%, var(--pink-deep) 100%); box-shadow: 0 6px 16px rgba(247,99,140,0.4); }
+
+    /* ---- FAB (add event) ---- */
+    .fab {
+      position: fixed; right: max(18px, env(safe-area-inset-right));
+      bottom: calc(86px + env(safe-area-inset-bottom)); z-index: 61;
+      width: 56px; height: 56px; border-radius: 50%; border: none; cursor: pointer;
+      background: linear-gradient(135deg, var(--pink) 0%, var(--pink-deep) 100%); color: #fff;
+      font-size: 28px; line-height: 1; box-shadow: 0 12px 28px rgba(247,99,140,0.5);
+      display: grid; place-items: center; transition: transform 0.15s ease;
+    }
+    .fab:active { transform: scale(0.9); }
 
     /* ---- Modal ---- */
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(107, 59, 78, 0.35);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 18px;
-      z-index: 50;
-    }
+    .modal-backdrop { position: fixed; inset: 0; background: rgba(107,59,78,0.35); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); display: none; align-items: center; justify-content: center; padding: 16px; z-index: 90; }
     .modal-backdrop.open { display: flex; animation: fade 0.2s ease; }
     @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
-
-    .modal {
-      width: 100%;
-      max-width: 440px;
-      max-height: 92dvh;
-      overflow-y: auto;
-      background: var(--cream);
-      border-radius: 26px;
-      box-shadow: 0 30px 70px rgba(107,59,78,0.4);
-      padding: clamp(22px, 6vw, 30px);
-      animation: rise 0.25s ease;
-    }
+    .modal { width: 100%; max-width: 460px; max-height: 92dvh; overflow-y: auto; background: var(--cream); border-radius: 26px; box-shadow: 0 30px 70px rgba(107,59,78,0.4); padding: clamp(20px,5.5vw,28px); animation: rise 0.25s ease; }
     @keyframes rise { from { transform: translateY(16px); opacity: 0; } to { transform: none; opacity: 1; } }
+    .modal h2 { font-family: var(--display); font-weight: 600; font-size: 23px; color: var(--ink); margin-bottom: 4px; }
+    .modal p.hint { font-size: 13px; color: var(--ink-soft); margin-bottom: 18px; }
 
-    .modal h2 {
-      font-family: var(--display);
-      font-weight: 600;
-      font-size: 24px;
-      color: var(--ink);
-      margin-bottom: 4px;
+    .field { text-align: left; margin-bottom: 15px; }
+    .field label { display: block; font-weight: 700; font-size: 13px; color: var(--ink); margin-bottom: 6px; }
+    .field input, .field textarea, .field select {
+      width: 100%; font-family: var(--body); font-size: 16px; color: var(--ink);
+      background: #fff; border: 1.5px solid #f2d5df; border-radius: 14px; padding: 12px 14px; transition: border-color 0.15s ease, box-shadow 0.15s ease;
     }
-    .modal p.hint { font-size: 13px; color: var(--ink-soft); margin-bottom: 20px; }
-
-    .field { text-align: left; margin-bottom: 16px; }
-    .field label {
-      display: block;
-      font-weight: 600;
-      font-size: 13px;
-      color: var(--ink);
-      margin-bottom: 6px;
-    }
-    .field input, .field textarea {
-      width: 100%;
-      font-family: var(--body);
-      font-size: 16px; /* >=16px avoids iOS zoom-on-focus */
-      color: var(--ink);
-      background: #fff;
-      border: 1.5px solid #f2d5df;
-      border-radius: 14px;
-      padding: 12px 14px;
-      transition: border-color 0.15s ease, box-shadow 0.15s ease;
-    }
-    .field input:focus, .field textarea:focus {
-      outline: none;
-      border-color: var(--pink);
-      box-shadow: 0 0 0 4px rgba(255,143,171,0.18);
-    }
-    .field textarea { resize: vertical; min-height: 64px; }
+    .field input:focus, .field textarea:focus, .field select:focus { outline: none; border-color: var(--pink); box-shadow: 0 0 0 4px rgba(255,143,171,0.18); }
+    .field textarea { resize: vertical; min-height: 60px; }
     .field .counter { font-size: 11px; color: var(--ink-soft); text-align: right; margin-top: 4px; }
     .row { display: flex; gap: 12px; }
-    .row .field { flex: 1; }
-    .tz-note { font-size: 12px; color: var(--ink-soft); margin: -6px 0 18px; }
+    .row .field { flex: 1; min-width: 0; }
+    .tz-note { font-size: 12px; color: var(--ink-soft); margin: -6px 0 16px; }
+
+    .toggle-row { display: flex; align-items: center; justify-content: space-between; background: #fff; border: 1.5px solid #f2d5df; border-radius: 14px; padding: 11px 14px; margin-bottom: 15px; }
+    .toggle-row .lab { font-weight: 700; font-size: 14px; color: var(--ink); }
+    .toggle-row .lab small { display: block; font-weight: 500; font-size: 11.5px; color: var(--ink-soft); }
+    .switch { position: relative; width: 46px; height: 27px; flex: 0 0 auto; }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .switch .slider { position: absolute; inset: 0; background: #e7c6d2; border-radius: 999px; transition: 0.2s; }
+    .switch .slider::before { content: ""; position: absolute; height: 21px; width: 21px; left: 3px; top: 3px; background: #fff; border-radius: 50%; transition: 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+    .switch input:checked + .slider { background: var(--pink-deep); }
+    .switch input:checked + .slider::before { transform: translateX(19px); }
 
     .modal-actions { display: flex; gap: 12px; margin-top: 8px; }
-    .modal-actions .btn { flex: 1; }
-    .form-error {
-      color: var(--pink-deep);
-      font-size: 13px;
-      font-weight: 600;
-      min-height: 18px;
-      margin-bottom: 10px;
-      text-align: center;
-    }
+    .modal-actions .btn { flex: 1; justify-content: center; }
+    .form-error { color: var(--pink-deep); font-size: 13px; font-weight: 700; min-height: 18px; margin-bottom: 10px; text-align: center; }
+    .modal-extra { display: flex; justify-content: space-between; align-items: center; margin-top: 14px; gap: 10px; flex-wrap: wrap; }
+
+    .swatches { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    .swatch { width: 34px; height: 34px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.12); cursor: pointer; }
+    .swatch.sel { outline: 3px solid var(--ink); outline-offset: 1px; }
+    .swatch-custom { width: 34px; height: 34px; padding: 0; border: none; background: none; cursor: pointer; }
+
+    /* day modal list */
+    .day-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
 
     /* toast */
-    .toast {
-      position: fixed;
-      left: 50%;
-      bottom: max(24px, env(safe-area-inset-bottom));
-      transform: translate(-50%, 140%);
-      background: var(--ink);
-      color: #fff;
-      font-weight: 600;
-      font-size: 14px;
-      padding: 12px 22px;
-      border-radius: 999px;
-      box-shadow: 0 12px 30px rgba(107,59,78,0.35);
-      z-index: 80;
-      transition: transform 0.35s cubic-bezier(0.2,0.9,0.3,1.2);
-      pointer-events: none;
-      max-width: 90vw;
-    }
-    .toast.show { transform: translate(-50%, 0); }
+    .toast { position: fixed; left: 50%; bottom: calc(90px + env(safe-area-inset-bottom)); transform: translate(-50%,180%); background: var(--ink); color: #fff; font-weight: 700; font-size: 14px; padding: 12px 22px; border-radius: 999px; box-shadow: 0 12px 30px rgba(107,59,78,0.35); z-index: 100; transition: transform 0.35s cubic-bezier(0.2,0.9,0.3,1.2); pointer-events: none; max-width: 90vw; text-align: center; }
+    .toast.show { transform: translate(-50%,0); }
     .toast.err { background: var(--pink-deep); }
 
-    /* floating hearts layer */
-    .hearts { position: fixed; inset: 0; pointer-events: none; z-index: 40; overflow: hidden; }
-    .heart {
-      position: absolute;
-      bottom: -40px;
-      font-size: 24px;
-      animation: floatUp linear forwards;
-      will-change: transform, opacity;
-    }
-    @keyframes floatUp {
-      0%   { transform: translateY(0) rotate(0deg) scale(0.6); opacity: 0; }
-      12%  { opacity: 1; }
-      100% { transform: translateY(-115dvh) rotate(var(--spin)) scale(1); opacity: 0; }
-    }
+    /* hearts */
+    .hearts { position: fixed; inset: 0; pointer-events: none; z-index: 55; overflow: hidden; }
+    .heart { position: absolute; bottom: -40px; font-size: 24px; animation: floatUp linear forwards; will-change: transform, opacity; }
+    @keyframes floatUp { 0% { transform: translateY(0) rotate(0deg) scale(0.6); opacity: 0; } 12% { opacity: 1; } 100% { transform: translateY(-115dvh) rotate(var(--spin)) scale(1); opacity: 0; } }
 
     .hidden { display: none !important; }
+    .footer-tip { margin-top: 16px; font-size: 12px; color: var(--ink-soft); opacity: 0.85; text-align: center; }
 
-    .footer-tip {
-      margin-top: 18px;
-      font-size: 12px;
-      color: var(--ink-soft);
-      opacity: 0.8;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .blob, .celebrate .big-emoji { animation: none; }
-    }
+    @media (prefers-reduced-motion: reduce) { .blob, .celebrate .big-emoji { animation: none; } }
   </style>
 </head>
 <body>
@@ -388,71 +259,174 @@
   <div class="blob b3"></div>
 
   <div class="wrap">
-    <div class="card">
-      <button class="edit-fab" id="editBtn" title="Edit our hangout" aria-label="Edit hangout">✎</button>
-
-      <!-- COUNTDOWN STATE -->
-      <div id="stateCountdown">
-        <div class="eyebrow">until we're together again</div>
-        <div class="names">Nikki <span class="amp">&amp;</span> Nate</div>
-        <div class="subhead" id="subhead">counting down to our next adventure</div>
-
-        <div class="countdown">
-          <div class="unit"><span class="num" id="cdDays">0</span><span class="lbl">days</span></div>
-          <div class="unit"><span class="num" id="cdHours">0</span><span class="lbl">hours</span></div>
-          <div class="unit"><span class="num" id="cdMins">0</span><span class="lbl">minutes</span></div>
-          <div class="unit"><span class="num" id="cdSecs">0</span><span class="lbl">seconds</span></div>
-        </div>
-
-        <div class="details">
+    <!-- ============ HOME VIEW ============ -->
+    <section id="viewHome">
+      <div class="card center">
+        <!-- COUNTDOWN -->
+        <div id="stateCountdown">
+          <div class="eyebrow">until we're together again</div>
+          <div class="names" id="namesHome">Nikki <span class="amp">&amp;</span> Nate</div>
+          <div class="subhead" id="subhead">counting down to our next adventure</div>
+          <div class="countdown">
+            <div class="unit"><span class="num" id="cdDays">0</span><span class="lbl">days</span></div>
+            <div class="unit"><span class="num" id="cdHours">0</span><span class="lbl">hours</span></div>
+            <div class="unit"><span class="num" id="cdMins">0</span><span class="lbl">minutes</span></div>
+            <div class="unit"><span class="num" id="cdSecs">0</span><span class="lbl">seconds</span></div>
+          </div>
           <div class="activity" id="activity">Loading…</div>
-          <div class="when" id="when">🗓️ <span id="whenText"></span></div>
+          <div class="chips" id="chips"></div>
           <div class="note" id="note"></div>
+          <div class="hero-actions">
+            <button class="btn btn-ghost btn-sm" id="heroIcs">📅 Add to calendar</button>
+            <button class="btn btn-ghost btn-sm" id="heroEdit">✎ Edit</button>
+          </div>
+        </div>
+
+        <!-- CELEBRATION -->
+        <div id="stateCelebrate" class="celebrate hidden">
+          <div class="big-emoji">🎉</div>
+          <div class="celebrate-title">It's time!! 🎉</div>
+          <div class="celebrate-sub" id="celebrateActivity"></div>
+          <div class="chips" id="celebrateChips"></div>
+          <div class="note" id="celebrateNote"></div>
+          <p class="footer-tip">Have the best time together 💕</p>
+        </div>
+
+        <!-- WAITING -->
+        <div id="stateWaiting" class="waiting hidden">
+          <div class="big-emoji">🌙</div>
+          <div class="waiting-title">Waiting for our next adventure…</div>
+          <div class="waiting-sub">No hangout on the calendar yet. Set a date and let the countdown begin!</div>
+          <button class="btn btn-primary" id="waitingSetBtn">Set our next date 💕</button>
         </div>
       </div>
 
-      <!-- CELEBRATION STATE -->
-      <div id="stateCelebrate" class="celebrate hidden">
-        <div class="big-emoji">🎉</div>
-        <div class="celebrate-title">It's time!! 🎉</div>
-        <div class="celebrate-sub" id="celebrateActivity"></div>
-        <div class="note" id="celebrateNote"></div>
-        <p class="footer-tip">Have the best time together 💕</p>
+      <!-- upcoming list -->
+      <div class="card" id="upcomingCard">
+        <div class="view-head"><div class="view-title">Coming up ✨</div></div>
+        <div class="evlist" id="upcomingList"></div>
+      </div>
+    </section>
+
+    <!-- ============ CALENDAR VIEW ============ -->
+    <section id="viewCalendar" class="hidden">
+      <div class="card">
+        <div class="view-head">
+          <div class="cal-nav">
+            <button class="icon-btn" id="calPrev" aria-label="Previous month">‹</button>
+            <div class="cal-month-label" id="calLabel">—</div>
+            <button class="icon-btn" id="calNext" aria-label="Next month">›</button>
+          </div>
+          <button class="btn btn-ghost btn-sm" id="calToday">Today</button>
+        </div>
+        <div class="cal-grid" id="calGrid"></div>
+        <div class="cal-legend">Tap a day to see or add plans 💕</div>
       </div>
 
-      <!-- WAITING / EMPTY STATE -->
-      <div id="stateWaiting" class="waiting hidden">
-        <div class="big-emoji">🌙</div>
-        <div class="waiting-title">Waiting for our next adventure…</div>
-        <div class="waiting-sub">No hangout on the calendar yet. Set a date and let the countdown begin!</div>
-        <button class="btn btn-primary" id="waitingSetBtn">Set our next date 💕</button>
+      <div class="card">
+        <div class="view-head"><div class="view-title" id="calListTitle">This month</div></div>
+        <div class="evlist" id="calList"></div>
       </div>
-    </div>
+    </section>
+
+    <!-- ============ SETTINGS VIEW ============ -->
+    <section id="viewSettings" class="hidden">
+      <div class="card">
+        <div class="view-head"><div class="view-title">Settings ⚙️</div></div>
+        <div class="field">
+          <label for="setNameA">Your names</label>
+          <div class="row">
+            <div class="field" style="margin-bottom:0"><input type="text" id="setNameA" maxlength="40" placeholder="Nikki" /></div>
+            <div class="field" style="margin-bottom:0"><input type="text" id="setNameB" maxlength="40" placeholder="Nate" /></div>
+          </div>
+        </div>
+        <div class="field">
+          <label for="setTz">Time zone</label>
+          <select id="setTz">
+            <option value="America/Los_Angeles">Los Angeles (Pacific)</option>
+            <option value="America/Denver">Denver (Mountain)</option>
+            <option value="America/Chicago">Chicago (Central)</option>
+            <option value="America/New_York">New York (Eastern)</option>
+            <option value="America/Phoenix">Phoenix (Arizona)</option>
+            <option value="America/Anchorage">Anchorage (Alaska)</option>
+            <option value="Pacific/Honolulu">Honolulu (Hawaii)</option>
+            <option value="Europe/London">London</option>
+            <option value="Europe/Paris">Paris</option>
+            <option value="Asia/Tokyo">Tokyo</option>
+            <option value="Australia/Sydney">Sydney</option>
+          </select>
+          <div class="tz-note">Event times are entered and shown in this zone.</div>
+        </div>
+        <div class="field">
+          <label>Accent color</label>
+          <div class="swatches" id="swatches">
+            <span class="swatch" data-c="#f7638c" style="background:#f7638c"></span>
+            <span class="swatch" data-c="#e0679b" style="background:#e0679b"></span>
+            <span class="swatch" data-c="#b56bd6" style="background:#b56bd6"></span>
+            <span class="swatch" data-c="#7c86e8" style="background:#7c86e8"></span>
+            <span class="swatch" data-c="#ec6b5a" style="background:#ec6b5a"></span>
+            <span class="swatch" data-c="#e59b3b" style="background:#e59b3b"></span>
+            <input type="color" class="swatch-custom" id="setAccentCustom" value="#f7638c" title="Custom color" />
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button class="btn btn-primary" id="setSave">Save settings 💕</button>
+        </div>
+        <div class="form-error" id="setError"></div>
+        <div class="modal-extra">
+          <button class="btn btn-ghost btn-sm" id="setDownloadAll">📥 Download all events (.ics)</button>
+        </div>
+      </div>
+    </section>
   </div>
 
-  <!-- EDIT MODAL -->
-  <div class="modal-backdrop" id="modalBackdrop">
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <h2 id="modalTitle">Our next hangout ✎</h2>
-      <p class="hint">Set when and what — Nikki's device updates within a minute.</p>
-      <form id="editForm" novalidate>
-        <div class="row">
-          <div class="field">
-            <label for="fDate">Date</label>
-            <input type="date" id="fDate" required />
-          </div>
-          <div class="field">
-            <label for="fTime">Time</label>
-            <input type="time" id="fTime" required />
-          </div>
-        </div>
-        <p class="tz-note">🌴 Times are Los Angeles time (PT).</p>
+  <!-- ============ NAV ============ -->
+  <button class="fab" id="fabAdd" aria-label="Add event">+</button>
+  <nav class="navbar">
+    <button class="navbtn active" data-view="home"><span class="ico">💕</span>Home</button>
+    <button class="navbtn" data-view="calendar"><span class="ico">🗓️</span>Calendar</button>
+    <button class="navbtn" data-view="settings"><span class="ico">⚙️</span>Settings</button>
+  </nav>
 
+  <!-- ============ EVENT MODAL ============ -->
+  <div class="modal-backdrop" id="eventBackdrop">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="eventModalTitle">
+      <h2 id="eventModalTitle">New hangout ✎</h2>
+      <p class="hint" id="eventModalHint">The other's device updates within a minute.</p>
+      <form id="eventForm" novalidate>
         <div class="field">
           <label for="fTitle">What we're doing</label>
           <input type="text" id="fTitle" maxlength="120" placeholder="Dinner at Bestia 🍝" required />
           <div class="counter"><span id="titleCount">0</span>/120</div>
         </div>
+        <div class="field">
+          <label for="fLocation">Location (optional)</label>
+          <input type="text" id="fLocation" maxlength="200" placeholder="2121 E 7th Pl, Los Angeles" />
+        </div>
+
+        <div class="toggle-row">
+          <span class="lab">All day<small>Multi-day works too — set an end date</small></span>
+          <label class="switch"><input type="checkbox" id="fAllDay" /><span class="slider"></span></label>
+        </div>
+
+        <div class="row">
+          <div class="field"><label for="fStartDate">Start date</label><input type="date" id="fStartDate" required /></div>
+          <div class="field" id="startTimeField"><label for="fStartTime">Start time</label><input type="time" id="fStartTime" /></div>
+        </div>
+
+        <div class="toggle-row">
+          <span class="lab" id="endToggleLab">Add an end time</span>
+          <label class="switch"><input type="checkbox" id="fHasEnd" /><span class="slider"></span></label>
+        </div>
+
+        <div id="endFields" class="hidden">
+          <div class="row">
+            <div class="field"><label for="fEndDate">End date</label><input type="date" id="fEndDate" /></div>
+            <div class="field" id="endTimeField"><label for="fEndTime">End time</label><input type="time" id="fEndTime" /></div>
+          </div>
+        </div>
+
+        <p class="tz-note" id="tzNote">🌴 Times are Los Angeles time.</p>
 
         <div class="field">
           <label for="fNote">A little note (optional)</label>
@@ -460,13 +434,30 @@
           <div class="counter"><span id="noteCount">0</span>/280</div>
         </div>
 
-        <div class="form-error" id="formError"></div>
+        <div class="form-error" id="eventError"></div>
 
         <div class="modal-actions">
-          <button type="button" class="btn btn-ghost" id="cancelBtn">Cancel</button>
-          <button type="submit" class="btn btn-primary" id="saveBtn">Save 💕</button>
+          <button type="button" class="btn btn-ghost" id="eventCancel">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="eventSave">Save 💕</button>
+        </div>
+        <div class="modal-extra">
+          <button type="button" class="btn btn-ghost btn-sm hidden" id="eventIcs">📅 Add to calendar (.ics)</button>
+          <button type="button" class="btn btn-danger btn-sm hidden" id="eventDelete">🗑 Delete</button>
         </div>
       </form>
+    </div>
+  </div>
+
+  <!-- ============ DAY MODAL ============ -->
+  <div class="modal-backdrop" id="dayBackdrop">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="dayModalTitle">
+      <h2 id="dayModalTitle">—</h2>
+      <p class="hint" id="dayModalHint"></p>
+      <div class="day-list" id="dayList"></div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" id="dayClose">Close</button>
+        <button type="button" class="btn btn-primary" id="dayAdd">+ Add on this day</button>
+      </div>
     </div>
   </div>
 
@@ -477,367 +468,647 @@
   (function () {
     "use strict";
 
-    var TZ = "America/Los_Angeles";
-    var POLL_MS = 60000;              // refetch cadence
-    var CELEBRATE_WINDOW_MS = 12 * 60 * 60 * 1000; // stay in "it's time!" for 12h after start
+    var POLL_MS = 60000;
+    var CELEBRATE_WINDOW_MS = 12 * 60 * 60 * 1000;
+    var DEFAULT_TZ = "America/Los_Angeles";
 
-    // ---- element refs ----
-    var els = {
-      stateCountdown: document.getElementById("stateCountdown"),
-      stateCelebrate: document.getElementById("stateCelebrate"),
-      stateWaiting: document.getElementById("stateWaiting"),
-      cdDays: document.getElementById("cdDays"),
-      cdHours: document.getElementById("cdHours"),
-      cdMins: document.getElementById("cdMins"),
-      cdSecs: document.getElementById("cdSecs"),
-      activity: document.getElementById("activity"),
-      when: document.getElementById("when"),
-      whenText: document.getElementById("whenText"),
-      note: document.getElementById("note"),
-      subhead: document.getElementById("subhead"),
-      celebrateActivity: document.getElementById("celebrateActivity"),
-      celebrateNote: document.getElementById("celebrateNote"),
-      editBtn: document.getElementById("editBtn"),
-      waitingSetBtn: document.getElementById("waitingSetBtn"),
-      modalBackdrop: document.getElementById("modalBackdrop"),
-      editForm: document.getElementById("editForm"),
-      fDate: document.getElementById("fDate"),
-      fTime: document.getElementById("fTime"),
-      fTitle: document.getElementById("fTitle"),
-      fNote: document.getElementById("fNote"),
-      titleCount: document.getElementById("titleCount"),
-      noteCount: document.getElementById("noteCount"),
-      formError: document.getElementById("formError"),
-      cancelBtn: document.getElementById("cancelBtn"),
-      saveBtn: document.getElementById("saveBtn"),
-      hearts: document.getElementById("hearts"),
-      toast: document.getElementById("toast"),
+    var state = {
+      events: [],
+      settings: { names: { a: "Nikki", b: "Nate" }, timezone: DEFAULT_TZ, accent: "#f7638c" },
+      view: "home",
+      calYear: 0, calMonth: 0,
+      editingId: null,
     };
 
-    var current = null;      // latest event object from the API
-    var pollTimer = null;
-    var tickTimer = null;
-    var lastPhase = null;    // "countdown" | "celebrate" | "waiting"
-    var celebrating = false; // to avoid re-spawning hearts every second
+    var $ = function (id) { return document.getElementById(id); };
+    function tz() { return (state.settings && state.settings.timezone) || DEFAULT_TZ; }
 
     // =========================================================
-    // Timezone helpers — interpret/display everything as LA time
+    // Timezone helpers (all relative to the configured zone)
     // =========================================================
-
-    // Offset (ms) of a timezone at a given instant: (wall-as-UTC) - actualUTC.
     function tzOffsetMs(timeZone, date) {
-      var dtf = new Intl.DateTimeFormat("en-US", {
-        timeZone: timeZone, hour12: false,
-        year: "numeric", month: "2-digit", day: "2-digit",
-        hour: "2-digit", minute: "2-digit", second: "2-digit",
-      });
-      var parts = dtf.formatToParts(date);
-      var m = {};
+      var dtf = new Intl.DateTimeFormat("en-US", { timeZone: timeZone, hour12: false, year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit" });
+      var parts = dtf.formatToParts(date), m = {};
       for (var i = 0; i < parts.length; i++) m[parts[i].type] = parts[i].value;
-      var hour = m.hour === "24" ? 0 : Number(m.hour); // Safari edge case
+      var hour = m.hour === "24" ? 0 : Number(m.hour);
       var asUTC = Date.UTC(+m.year, +m.month - 1, +m.day, hour, +m.minute, +m.second);
       return asUTC - date.getTime();
     }
-
-    // Convert an LA wall date/time (from the form) to a real Date instant.
-    function laWallToDate(y, mo, d, h, mi) {
+    // wall date/time in the configured zone -> real Date instant
+    function wallToDate(y, mo, d, h, mi) {
       var guess = Date.UTC(y, mo - 1, d, h, mi, 0);
-      // Refine twice to settle DST boundaries.
-      var off = tzOffsetMs(TZ, new Date(guess));
+      var off = tzOffsetMs(tz(), new Date(guess));
       var real = guess - off;
-      off = tzOffsetMs(TZ, new Date(real));
+      off = tzOffsetMs(tz(), new Date(real));
       real = guess - off;
       return new Date(real);
     }
-
-    // Break an instant into LA wall components (for pre-filling the form).
-    function dateToLAParts(date) {
-      var dtf = new Intl.DateTimeFormat("en-CA", {
-        timeZone: TZ, hour12: false,
-        year: "numeric", month: "2-digit", day: "2-digit",
-        hour: "2-digit", minute: "2-digit",
-      });
-      var parts = dtf.formatToParts(date);
-      var m = {};
+    function zoneParts(date) {
+      var dtf = new Intl.DateTimeFormat("en-CA", { timeZone: tz(), hour12: false, year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" });
+      var parts = dtf.formatToParts(date), m = {};
       for (var i = 0; i < parts.length; i++) m[parts[i].type] = parts[i].value;
       if (m.hour === "24") m.hour = "00";
-      return { date: m.year + "-" + m.month + "-" + m.day, time: m.hour + ":" + m.minute };
+      return m;
+    }
+    function zoneDateStr(iso) { var m = zoneParts(new Date(iso)); return m.year + "-" + m.month + "-" + m.day; }
+    function zoneTimeStr(iso) { var m = zoneParts(new Date(iso)); return m.hour + ":" + m.minute; }
+
+    function fmtDateLong(iso) { return new Intl.DateTimeFormat("en-US", { timeZone: tz(), weekday: "short", month: "short", day: "numeric" }).format(new Date(iso)); }
+    function fmtTime(iso) { return new Intl.DateTimeFormat("en-US", { timeZone: tz(), hour: "numeric", minute: "2-digit" }).format(new Date(iso)); }
+
+    // Human summary of an event's when.
+    function whenText(ev) {
+      if (ev.allDay) {
+        var s = fmtDateLong(ev.start);
+        if (ev.end && zoneDateStr(ev.end) !== zoneDateStr(ev.start)) return s + " – " + fmtDateLong(ev.end) + " · All day";
+        return s + " · All day";
+      }
+      var base = fmtDateLong(ev.start) + " · " + fmtTime(ev.start);
+      if (ev.end) {
+        if (zoneDateStr(ev.end) === zoneDateStr(ev.start)) return base + "–" + fmtTime(ev.end);
+        return base + " – " + fmtDateLong(ev.end) + " " + fmtTime(ev.end);
+      }
+      return base;
     }
 
-    // Pretty date/time in LA, e.g. "Sat, Aug 1 · 7:30 PM".
-    function formatWhen(iso) {
-      var d = new Date(iso);
-      var datePart = new Intl.DateTimeFormat("en-US", {
-        timeZone: TZ, weekday: "short", month: "short", day: "numeric",
-      }).format(d);
-      var timePart = new Intl.DateTimeFormat("en-US", {
-        timeZone: TZ, hour: "numeric", minute: "2-digit",
-      }).format(d);
-      return datePart + " · " + timePart;
+    // effective end for "is it over?" logic
+    function effectiveEnd(ev) {
+      if (ev.end) return new Date(ev.end).getTime();
+      if (ev.allDay) return new Date(ev.start).getTime() + 24 * 3600 * 1000;
+      return new Date(ev.start).getTime() + CELEBRATE_WINDOW_MS;
+    }
+
+    // The event the hero focuses on: earliest one that isn't over yet.
+    function heroEvent() {
+      var now = Date.now(), best = null;
+      for (var i = 0; i < state.events.length; i++) {
+        var ev = state.events[i];
+        if (effectiveEnd(ev) > now) { if (!best || new Date(ev.start) < new Date(best.start)) best = ev; }
+      }
+      return best;
     }
 
     // =========================================================
-    // Rendering
+    // Rendering: HOME
     // =========================================================
-
     function pad(n) { return n < 10 ? "0" + n : "" + n; }
 
-    function showState(phase) {
-      els.stateCountdown.classList.toggle("hidden", phase !== "countdown");
-      els.stateCelebrate.classList.toggle("hidden", phase !== "celebrate");
-      els.stateWaiting.classList.toggle("hidden", phase !== "waiting");
+    function esc(s) { var d = document.createElement("div"); d.textContent = s == null ? "" : s; return d.innerHTML; }
+
+    function chipsHtml(ev) {
+      var html = '<span class="chip">🗓️ ' + esc(whenText(ev)) + "</span>";
+      if (ev.location) html += '<span class="chip">📍 ' + esc(ev.location) + "</span>";
+      return html;
     }
 
-    function renderDetails() {
-      if (!current) return;
-      els.activity.textContent = current.title || "Our next hangout";
-      els.whenText.textContent = formatWhen(current.datetime);
-      els.note.textContent = current.note || "";
-      els.celebrateActivity.textContent = current.title ? ("Time for " + current.title) : "";
-      els.celebrateNote.textContent = current.note || "";
+    function showHomeState(phase) {
+      $("stateCountdown").classList.toggle("hidden", phase !== "countdown");
+      $("stateCelebrate").classList.toggle("hidden", phase !== "celebrate");
+      $("stateWaiting").classList.toggle("hidden", phase !== "waiting");
     }
 
-    // The once-per-second tick — always recomputed from the target (no drift).
+    var lastPhase = null, celebrating = false;
+
     function tick() {
-      if (!current || !current.datetime) {
-        setPhase("waiting");
-        return;
-      }
-      var target = new Date(current.datetime).getTime();
-      if (isNaN(target)) { setPhase("waiting"); return; }
+      // names
+      var n = state.settings.names || { a: "Nikki", b: "Nate" };
+      $("namesHome").innerHTML = esc(n.a) + ' <span class="amp">&amp;</span> ' + esc(n.b);
 
-      var diff = target - Date.now();
+      var ev = heroEvent();
+      if (!ev) { setPhase("waiting"); renderUpcoming(); return; }
+
+      var start = new Date(ev.start).getTime();
+      var diff = start - Date.now();
 
       if (diff <= 0) {
-        // Past the start time.
-        if (diff > -CELEBRATE_WINDOW_MS) {
-          setPhase("celebrate");
-        } else {
-          setPhase("waiting");
-        }
-        return;
+        setPhase("celebrate");
+        $("celebrateActivity").textContent = ev.title ? "Time for " + ev.title : "";
+        $("celebrateChips").innerHTML = chipsHtml(ev);
+        $("celebrateNote").textContent = ev.note || "";
+      } else {
+        setPhase("countdown");
+        $("activity").textContent = ev.title || "Our next hangout";
+        $("chips").innerHTML = chipsHtml(ev);
+        $("note").textContent = ev.note || "";
+        var t = Math.floor(diff / 1000);
+        $("cdDays").textContent = Math.floor(t / 86400);
+        $("cdHours").textContent = pad(Math.floor((t % 86400) / 3600));
+        $("cdMins").textContent = pad(Math.floor((t % 3600) / 60));
+        $("cdSecs").textContent = pad(t % 60);
       }
-
-      setPhase("countdown");
-
-      var totalSec = Math.floor(diff / 1000);
-      var days = Math.floor(totalSec / 86400);
-      var hours = Math.floor((totalSec % 86400) / 3600);
-      var mins = Math.floor((totalSec % 3600) / 60);
-      var secs = totalSec % 60;
-
-      els.cdDays.textContent = days;
-      els.cdHours.textContent = pad(hours);
-      els.cdMins.textContent = pad(mins);
-      els.cdSecs.textContent = pad(secs);
+      renderUpcoming();
     }
 
     function setPhase(phase) {
       if (phase !== lastPhase) {
-        showState(phase);
-        if (phase === "celebrate") {
-          if (!celebrating) { celebrating = true; startHearts(); }
-        } else {
-          celebrating = false;
-          stopHearts();
-        }
+        showHomeState(phase);
+        if (phase === "celebrate") { if (!celebrating) { celebrating = true; startHearts(); } }
+        else { celebrating = false; stopHearts(); }
         lastPhase = phase;
       }
     }
 
+    function renderUpcoming() {
+      var now = Date.now();
+      var upcoming = state.events.filter(function (e) { return effectiveEnd(e) > now; });
+      var hero = heroEvent();
+      // exclude the hero (already featured) from the small list
+      upcoming = upcoming.filter(function (e) { return !hero || e.id !== hero.id; });
+      $("upcomingCard").classList.toggle("hidden", upcoming.length === 0);
+      $("upcomingList").innerHTML = upcoming.map(eventItemHtml).join("");
+      wireEventItems($("upcomingList"));
+    }
+
+    function eventItemHtml(ev) {
+      var m = zoneParts(new Date(ev.start));
+      var mon = new Intl.DateTimeFormat("en-US", { timeZone: tz(), month: "short" }).format(new Date(ev.start));
+      var dow = new Intl.DateTimeFormat("en-US", { timeZone: tz(), weekday: "short" }).format(new Date(ev.start));
+      var past = effectiveEnd(ev) <= Date.now();
+      var meta = ev.allDay ? "All day" : fmtTime(ev.start);
+      if (ev.location) meta += '<span class="sep">·</span>📍 ' + esc(ev.location);
+      return '<div class="ev-item ' + (past ? "ev-past" : "") + '" data-id="' + esc(ev.id) + '">' +
+        '<div class="ev-date"><div class="m">' + esc(mon) + '</div><div class="d">' + (+m.day) + '</div><div class="dow">' + esc(dow) + '</div></div>' +
+        '<div class="ev-main"><div class="t">' + esc(ev.title) + '</div><div class="meta">' + meta + '</div></div></div>';
+    }
+
+    function wireEventItems(container) {
+      var items = container.querySelectorAll(".ev-item");
+      for (var i = 0; i < items.length; i++) {
+        items[i].addEventListener("click", function () {
+          var ev = state.events.find(function (e) { return e.id === this.getAttribute("data-id"); }.bind(this));
+          if (ev) openEventModal(ev);
+        });
+      }
+    }
+
     // =========================================================
-    // Floating hearts / confetti
+    // Rendering: CALENDAR
+    // =========================================================
+    function todayZoneStr() { return zoneDateStr(new Date().toISOString()); }
+
+    // set of "YYYY-MM-DD" dates an event covers (in the configured zone)
+    function eventDateSet(ev) {
+      var out = {};
+      var s = zoneDateStr(ev.start);
+      var e = ev.end ? zoneDateStr(ev.end) : s;
+      // iterate day by day using UTC-noon anchors to avoid DST edges
+      var cur = s.split("-"), endp = e.split("-");
+      var d = Date.UTC(+cur[0], +cur[1] - 1, +cur[2], 12);
+      var last = Date.UTC(+endp[0], +endp[1] - 1, +endp[2], 12);
+      var guard = 0;
+      while (d <= last && guard < 400) {
+        var dt = new Date(d);
+        out[dt.getUTCFullYear() + "-" + pad(dt.getUTCMonth() + 1) + "-" + pad(dt.getUTCDate())] = true;
+        d += 86400000; guard++;
+      }
+      return out;
+    }
+
+    function buildDateIndex() {
+      var idx = {};
+      state.events.forEach(function (ev) {
+        var set = eventDateSet(ev);
+        Object.keys(set).forEach(function (k) { (idx[k] = idx[k] || []).push(ev); });
+      });
+      return idx;
+    }
+
+    function renderCalendar() {
+      var y = state.calYear, mo = state.calMonth; // mo 0-11
+      $("calLabel").textContent = new Intl.DateTimeFormat("en-US", { month: "long", year: "numeric" }).format(new Date(Date.UTC(y, mo, 1)));
+
+      var grid = $("calGrid");
+      grid.innerHTML = "";
+      ["S", "M", "T", "W", "T", "F", "S"].forEach(function (d) {
+        var el = document.createElement("div"); el.className = "cal-dow"; el.textContent = d; grid.appendChild(el);
+      });
+
+      var firstDow = new Date(Date.UTC(y, mo, 1)).getUTCDay();
+      var daysInMonth = new Date(Date.UTC(y, mo + 1, 0)).getUTCDate();
+      var idx = buildDateIndex();
+      var today = todayZoneStr();
+
+      for (var i = 0; i < firstDow; i++) {
+        var e = document.createElement("div"); e.className = "cal-cell empty"; grid.appendChild(e);
+      }
+      for (var day = 1; day <= daysInMonth; day++) {
+        var key = y + "-" + pad(mo + 1) + "-" + pad(day);
+        var evs = idx[key] || [];
+        var cell = document.createElement("div");
+        cell.className = "cal-cell" + (evs.length ? " has-events" : "") + (key === today ? " today" : "");
+        cell.setAttribute("data-date", key);
+        var dots = evs.slice(0, 3).map(function () { return '<span class="cal-dot"></span>'; }).join("");
+        cell.innerHTML = '<span class="dnum">' + day + "</span>" + (dots ? '<span class="cal-dots">' + dots + "</span>" : "");
+        cell.addEventListener("click", function () { openDayModal(this.getAttribute("data-date")); });
+        grid.appendChild(cell);
+      }
+
+      // month event list
+      var monthEvents = state.events.filter(function (ev) {
+        var set = eventDateSet(ev);
+        return Object.keys(set).some(function (k) { var p = k.split("-"); return +p[0] === y && +p[1] === mo + 1; });
+      });
+      $("calListTitle").textContent = new Intl.DateTimeFormat("en-US", { month: "long", year: "numeric" }).format(new Date(Date.UTC(y, mo, 1)));
+      var list = $("calList");
+      if (monthEvents.length === 0) {
+        list.innerHTML = '<div class="ev-empty">Nothing planned this month yet 🌸</div>';
+      } else {
+        list.innerHTML = monthEvents.map(eventItemHtml).join("");
+        wireEventItems(list);
+      }
+    }
+
+    function shiftMonth(delta) {
+      var mo = state.calMonth + delta, y = state.calYear;
+      if (mo < 0) { mo = 11; y--; } else if (mo > 11) { mo = 0; y++; }
+      state.calMonth = mo; state.calYear = y; renderCalendar();
+    }
+    function calToToday() {
+      var m = zoneParts(new Date());
+      state.calYear = +m.year; state.calMonth = +m.month - 1; renderCalendar();
+    }
+
+    // =========================================================
+    // Day modal
+    // =========================================================
+    var dayModalDate = null;
+    function openDayModal(dateKey) {
+      dayModalDate = dateKey;
+      var p = dateKey.split("-");
+      var label = new Intl.DateTimeFormat("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" }).format(new Date(Date.UTC(+p[0], +p[1] - 1, +p[2], 12)));
+      $("dayModalTitle").textContent = label;
+      var idx = buildDateIndex();
+      var evs = idx[dateKey] || [];
+      $("dayModalHint").textContent = evs.length ? (evs.length + (evs.length === 1 ? " plan" : " plans")) : "Nothing planned — add something 💕";
+      var list = $("dayList");
+      list.innerHTML = evs.length ? evs.map(eventItemHtml).join("") : "";
+      wireDayItems();
+      $("dayBackdrop").classList.add("open");
+    }
+    function wireDayItems() {
+      var items = $("dayList").querySelectorAll(".ev-item");
+      for (var i = 0; i < items.length; i++) {
+        items[i].addEventListener("click", function () {
+          var ev = state.events.find(function (e) { return e.id === this.getAttribute("data-id"); }.bind(this));
+          if (ev) { closeDayModal(); openEventModal(ev); }
+        });
+      }
+    }
+    function closeDayModal() { $("dayBackdrop").classList.remove("open"); }
+
+    // =========================================================
+    // Floating hearts
     // =========================================================
     var heartTimer = null;
     var HEART_CHARS = ["💕", "💖", "💗", "🩷", "✨", "💞", "🌸"];
-
     function spawnHeart() {
-      var h = document.createElement("div");
-      h.className = "heart";
+      var h = document.createElement("div"); h.className = "heart";
       h.textContent = HEART_CHARS[Math.floor(Math.random() * HEART_CHARS.length)];
       h.style.left = Math.random() * 100 + "vw";
       var dur = 4 + Math.random() * 4;
       h.style.animationDuration = dur + "s";
       h.style.fontSize = 18 + Math.random() * 26 + "px";
       h.style.setProperty("--spin", (Math.random() * 720 - 360) + "deg");
-      els.hearts.appendChild(h);
+      $("hearts").appendChild(h);
       setTimeout(function () { h.remove(); }, dur * 1000 + 200);
     }
-
-    function startHearts() {
-      if (heartTimer) return;
-      var burst = 14;
-      for (var i = 0; i < burst; i++) setTimeout(spawnHeart, i * 90);
-      heartTimer = setInterval(spawnHeart, 550);
-    }
-    function stopHearts() {
-      if (heartTimer) { clearInterval(heartTimer); heartTimer = null; }
-    }
+    function startHearts() { if (heartTimer) return; for (var i = 0; i < 14; i++) setTimeout(spawnHeart, i * 90); heartTimer = setInterval(spawnHeart, 550); }
+    function stopHearts() { if (heartTimer) { clearInterval(heartTimer); heartTimer = null; } }
 
     // =========================================================
-    // API sync
+    // ICS generation (client-side download)
     // =========================================================
-
-    function applyData(data) {
-      // Only update + re-render details if something actually changed.
-      var changed = JSON.stringify(data) !== JSON.stringify(current);
-      current = data;
-      if (changed) {
-        if (current) renderDetails();
-        // Force a phase recompute on next tick.
-        lastPhase = null;
-      }
-      tick();
+    function icsEscape(s) { return String(s || "").replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\r?\n/g, "\\n"); }
+    function icsStampUTC(d) {
+      return d.getUTCFullYear() + pad(d.getUTCMonth() + 1) + pad(d.getUTCDate()) + "T" + pad(d.getUTCHours()) + pad(d.getUTCMinutes()) + pad(d.getUTCSeconds()) + "Z";
     }
-
-    function fetchData() {
-      return fetch("/api/hangout", { headers: { "Accept": "application/json" }, cache: "no-store" })
-        .then(function (r) {
-          if (!r.ok) throw new Error("HTTP " + r.status);
-          return r.json();
-        })
-        .then(function (data) { applyData(data); })
-        .catch(function (err) { /* keep last known state on transient errors */ console.warn("fetch failed:", err); });
+    function zoneYMD(iso) { var m = zoneParts(new Date(iso)); return m.year + m.month + m.day; }
+    function addDayYMD(ymd) {
+      var y = +ymd.slice(0, 4), mo = +ymd.slice(4, 6), d = +ymd.slice(6, 8);
+      var dt = new Date(Date.UTC(y, mo - 1, d + 1, 12));
+      return dt.getUTCFullYear() + pad(dt.getUTCMonth() + 1) + pad(dt.getUTCDate());
     }
-
-    // =========================================================
-    // Polling lifecycle (pause when hidden, refetch on focus)
-    // =========================================================
-
-    function startPolling() {
-      stopPolling();
-      pollTimer = setInterval(fetchData, POLL_MS);
+    function foldICS(line) {
+      // RFC5545 recommends folding at 75 octets; keep it simple with 73-char chunks
+      if (line.length <= 73) return line;
+      var out = line.slice(0, 73), rest = line.slice(73);
+      while (rest.length) { out += "\r\n " + rest.slice(0, 72); rest = rest.slice(72); }
+      return out;
     }
-    function stopPolling() {
-      if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
-    }
-
-    document.addEventListener("visibilitychange", function () {
-      if (document.hidden) {
-        stopPolling();
+    function veventLines(ev) {
+      var lines = ["BEGIN:VEVENT", "UID:" + (ev.id || newLocalId()) + "@nikki-nate-countdown", "DTSTAMP:" + icsStampUTC(new Date())];
+      if (ev.allDay) {
+        var startD = zoneYMD(ev.start);
+        var endBase = ev.end ? zoneYMD(ev.end) : startD;
+        lines.push("DTSTART;VALUE=DATE:" + startD);
+        lines.push("DTEND;VALUE=DATE:" + addDayYMD(endBase)); // exclusive
       } else {
-        fetchData();     // refetch immediately on focus
-        startPolling();
+        lines.push("DTSTART:" + icsStampUTC(new Date(ev.start)));
+        var end = ev.end ? new Date(ev.end) : new Date(new Date(ev.start).getTime() + 3600000);
+        lines.push("DTEND:" + icsStampUTC(end));
       }
-    });
-    window.addEventListener("focus", function () { if (!document.hidden) fetchData(); });
+      lines.push("SUMMARY:" + icsEscape(ev.title));
+      if (ev.location) lines.push("LOCATION:" + icsEscape(ev.location));
+      if (ev.note) lines.push("DESCRIPTION:" + icsEscape(ev.note));
+      lines.push("END:VEVENT");
+      return lines;
+    }
+    function buildICS(events) {
+      var lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Nikki & Nate//Countdown//EN", "CALSCALE:GREGORIAN", "METHOD:PUBLISH"];
+      events.forEach(function (ev) { lines = lines.concat(veventLines(ev)); });
+      lines.push("END:VCALENDAR");
+      return lines.map(foldICS).join("\r\n");
+    }
+    function slug(s) { return (s || "event").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 40) || "event"; }
+    function downloadICS(events, filename) {
+      var blob = new Blob([buildICS(events)], { type: "text/calendar;charset=utf-8" });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement("a"); a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function () { URL.revokeObjectURL(url); }, 1500);
+    }
+    function newLocalId() { return "e" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
 
     // =========================================================
-    // Edit modal
+    // Event modal (add / edit)
     // =========================================================
+    function defaultStart() {
+      var d = new Date(Date.now() + 3 * 86400000);
+      return { date: zoneDateStr(d.toISOString()), time: "19:00" };
+    }
 
-    function openModal() {
-      els.formError.textContent = "";
-      // Pre-fill from current, else sensible defaults (next Fri 7pm LA).
-      if (current && current.datetime) {
-        var p = dateToLAParts(new Date(current.datetime));
-        els.fDate.value = p.date;
-        els.fTime.value = p.time;
-        els.fTitle.value = current.title || "";
-        els.fNote.value = current.note || "";
+    function syncAllDayUI() {
+      var allDay = $("fAllDay").checked;
+      $("startTimeField").classList.toggle("hidden", allDay);
+      $("endTimeField").classList.toggle("hidden", allDay);
+      $("endToggleLab").textContent = allDay ? "Multiple days" : "Add an end time";
+    }
+    function syncEndUI() {
+      $("endFields").classList.toggle("hidden", !$("fHasEnd").checked);
+    }
+
+    // open modal; ev = existing event or a {startDate} seed or null
+    function openEventModal(ev) {
+      $("eventError").textContent = "";
+      var isEdit = ev && ev.id;
+      state.editingId = isEdit ? ev.id : null;
+      $("eventModalTitle").textContent = isEdit ? "Edit hangout ✎" : "New hangout ✎";
+      $("eventDelete").classList.toggle("hidden", !isEdit);
+      $("eventIcs").classList.toggle("hidden", !isEdit);
+      $("tzNote").textContent = "🌴 Times are " + tzLabel() + ".";
+
+      if (isEdit) {
+        $("fTitle").value = ev.title || "";
+        $("fLocation").value = ev.location || "";
+        $("fNote").value = ev.note || "";
+        $("fAllDay").checked = !!ev.allDay;
+        $("fStartDate").value = zoneDateStr(ev.start);
+        $("fStartTime").value = ev.allDay ? "09:00" : zoneTimeStr(ev.start);
+        if (ev.end) {
+          $("fHasEnd").checked = true;
+          $("fEndDate").value = zoneDateStr(ev.end);
+          $("fEndTime").value = ev.allDay ? "17:00" : zoneTimeStr(ev.end);
+        } else {
+          $("fHasEnd").checked = false; $("fEndDate").value = ""; $("fEndTime").value = "";
+        }
       } else {
-        var soon = defaultFutureLA();
-        els.fDate.value = soon.date;
-        els.fTime.value = soon.time;
-        els.fTitle.value = "";
-        els.fNote.value = "";
+        var seedDate = ev && ev.startDate ? ev.startDate : defaultStart().date;
+        $("fTitle").value = ""; $("fLocation").value = ""; $("fNote").value = "";
+        $("fAllDay").checked = false;
+        $("fStartDate").value = seedDate; $("fStartTime").value = "19:00";
+        $("fHasEnd").checked = false; $("fEndDate").value = ""; $("fEndTime").value = "";
       }
-      updateCounters();
-      els.modalBackdrop.classList.add("open");
-      setTimeout(function () { els.fTitle.focus(); }, 60);
+      syncAllDayUI(); syncEndUI(); updateCounters();
+      $("eventBackdrop").classList.add("open");
+      setTimeout(function () { $("fTitle").focus(); }, 60);
     }
+    function closeEventModal() { $("eventBackdrop").classList.remove("open"); }
 
-    function defaultFutureLA() {
-      // ~a week out at 7:00 PM LA.
-      var d = new Date(Date.now() + 7 * 86400000);
-      var p = dateToLAParts(d);
-      return { date: p.date, time: "19:00" };
+    function tzLabel() {
+      var sel = $("setTz");
+      for (var i = 0; i < sel.options.length; i++) if (sel.options[i].value === tz()) return sel.options[i].text;
+      return tz();
     }
+    function updateCounters() { $("titleCount").textContent = $("fTitle").value.length; $("noteCount").textContent = $("fNote").value.length; }
 
-    function closeModal() {
-      els.modalBackdrop.classList.remove("open");
-    }
+    function collectEventFromForm() {
+      var title = $("fTitle").value.trim();
+      if (!title) return { error: "What are we doing? Add a title." };
+      var sd = $("fStartDate").value;
+      if (!sd) return { error: "Please pick a start date." };
+      var allDay = $("fAllDay").checked;
+      var st = allDay ? "00:00" : ($("fStartTime").value || "00:00");
+      var sdp = sd.split("-"), stp = st.split(":");
+      var start = wallToDate(+sdp[0], +sdp[1], +sdp[2], +stp[0], +stp[1]);
 
-    function updateCounters() {
-      els.titleCount.textContent = els.fTitle.value.length;
-      els.noteCount.textContent = els.fNote.value.length;
+      var end = null;
+      if ($("fHasEnd").checked) {
+        var ed = $("fEndDate").value || sd;
+        var et = allDay ? "00:00" : ($("fEndTime").value || st);
+        var edp = ed.split("-"), etp = et.split(":");
+        end = wallToDate(+edp[0], +edp[1], +edp[2], +etp[0], +etp[1]);
+        if (end.getTime() < start.getTime()) return { error: "End must be on or after the start." };
+      }
+      return {
+        event: {
+          id: state.editingId || undefined,
+          title: title,
+          location: $("fLocation").value.trim(),
+          note: $("fNote").value.trim(),
+          allDay: allDay,
+          start: start.toISOString(),
+          end: end ? end.toISOString() : null,
+        },
+      };
     }
 
     function saveEvent(e) {
       e.preventDefault();
-      els.formError.textContent = "";
-
-      var dateStr = els.fDate.value;     // "YYYY-MM-DD"
-      var timeStr = els.fTime.value;     // "HH:MM"
-      var title = els.fTitle.value.trim();
-
-      if (!dateStr || !timeStr) { els.formError.textContent = "Please pick a date and time."; return; }
-      if (!title) { els.formError.textContent = "What are we doing? Add a title."; return; }
-
-      var dp = dateStr.split("-");
-      var tp = timeStr.split(":");
-      var instant = laWallToDate(+dp[0], +dp[1], +dp[2], +tp[0], +tp[1]);
-      if (isNaN(instant.getTime())) { els.formError.textContent = "That date/time didn't look right."; return; }
-
-      var payload = {
-        title: title,
-        note: els.fNote.value.trim(),
-        datetime: instant.toISOString(),
-      };
-
-      els.saveBtn.disabled = true;
-      els.saveBtn.textContent = "Saving…";
-
-      fetch("/api/hangout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      })
-        .then(function (r) {
-          return r.json().then(function (b) { return { ok: r.ok, body: b }; });
+      $("eventError").textContent = "";
+      var res = collectEventFromForm();
+      if (res.error) { $("eventError").textContent = res.error; return; }
+      var btn = $("eventSave"); btn.disabled = true; btn.textContent = "Saving…";
+      api({ action: "upsert-event", event: res.event })
+        .then(function (data) {
+          if (data.events) state.events = data.events;
+          applyAfterMutation();
+          closeEventModal();
+          showToast("Saved 💕");
         })
-        .then(function (res) {
-          if (!res.ok) throw new Error((res.body && res.body.error) || "Save failed");
-          applyData(res.body);
-          closeModal();
-          showToast("Saved 💕 Nikki will see it soon");
-        })
-        .catch(function (err) {
-          els.formError.textContent = err.message || "Something went wrong. Try again?";
-        })
-        .finally(function () {
-          els.saveBtn.disabled = false;
-          els.saveBtn.textContent = "Save 💕";
-        });
+        .catch(function (err) { $("eventError").textContent = err.message || "Couldn't save. Try again?"; })
+        .finally(function () { btn.disabled = false; btn.textContent = "Save 💕"; });
     }
 
+    function deleteEvent() {
+      if (!state.editingId) return;
+      if (!window.confirm("Delete this event?")) return;
+      var btn = $("eventDelete"); btn.disabled = true;
+      api({ action: "delete-event", id: state.editingId })
+        .then(function (data) {
+          if (data.events) state.events = data.events;
+          applyAfterMutation();
+          closeEventModal();
+          showToast("Deleted");
+        })
+        .catch(function (err) { $("eventError").textContent = err.message || "Couldn't delete."; })
+        .finally(function () { btn.disabled = false; });
+    }
+
+    function applyAfterMutation() {
+      lastPhase = null; // force home recompute
+      tick();
+      if (state.view === "calendar") renderCalendar();
+    }
+
+    // =========================================================
+    // Settings
+    // =========================================================
+    function fillSettingsForm() {
+      $("setNameA").value = state.settings.names.a;
+      $("setNameB").value = state.settings.names.b;
+      $("setTz").value = state.settings.timezone;
+      if ($("setTz").value !== state.settings.timezone) {
+        // add unknown zone as an option so it shows
+        var o = document.createElement("option"); o.value = state.settings.timezone; o.text = state.settings.timezone; $("setTz").appendChild(o); $("setTz").value = state.settings.timezone;
+      }
+      $("setAccentCustom").value = state.settings.accent;
+      markSwatch(state.settings.accent);
+    }
+    function markSwatch(color) {
+      var sw = document.querySelectorAll("#swatches .swatch");
+      for (var i = 0; i < sw.length; i++) sw[i].classList.toggle("sel", sw[i].getAttribute("data-c") === color);
+    }
+    function saveSettings() {
+      $("setError").textContent = "";
+      var settings = {
+        names: { a: $("setNameA").value.trim() || "Nikki", b: $("setNameB").value.trim() || "Nate" },
+        timezone: $("setTz").value,
+        accent: $("setAccentCustom").value,
+      };
+      var btn = $("setSave"); btn.disabled = true; btn.textContent = "Saving…";
+      api({ action: "save-settings", settings: settings })
+        .then(function (data) {
+          if (data.settings) state.settings = data.settings;
+          applyAccent(); tick(); renderCalendar();
+          showToast("Settings saved 💕");
+        })
+        .catch(function (err) { $("setError").textContent = err.message || "Couldn't save settings."; })
+        .finally(function () { btn.disabled = false; btn.textContent = "Save settings 💕"; });
+    }
+    function applyAccent() {
+      var c = state.settings.accent || "#f7638c";
+      document.documentElement.style.setProperty("--pink-deep", c);
+      document.documentElement.style.setProperty("--pink", lighten(c, 0.22));
+    }
+    function lighten(hex, amt) {
+      var m = /^#([0-9a-f]{6})$/i.exec(hex); if (!m) return hex;
+      var n = parseInt(m[1], 16), r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
+      r = Math.round(r + (255 - r) * amt); g = Math.round(g + (255 - g) * amt); b = Math.round(b + (255 - b) * amt);
+      return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+    }
+
+    // =========================================================
+    // View switching
+    // =========================================================
+    function setView(view) {
+      state.view = view;
+      $("viewHome").classList.toggle("hidden", view !== "home");
+      $("viewCalendar").classList.toggle("hidden", view !== "calendar");
+      $("viewSettings").classList.toggle("hidden", view !== "settings");
+      var btns = document.querySelectorAll(".navbtn");
+      for (var i = 0; i < btns.length; i++) btns[i].classList.toggle("active", btns[i].getAttribute("data-view") === view);
+      $("fabAdd").classList.toggle("hidden", view === "settings");
+      if (view === "calendar") renderCalendar();
+      if (view === "settings") fillSettingsForm();
+      window.scrollTo(0, 0);
+    }
+
+    // =========================================================
+    // API + polling
+    // =========================================================
+    function api(body) {
+      return fetch("/api/events", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
+        .then(function (r) { return r.json().then(function (b) { if (!r.ok) throw new Error(b && b.error || "Request failed"); return b; }); });
+    }
+    function fetchData() {
+      return fetch("/api/events", { headers: { Accept: "application/json" }, cache: "no-store" })
+        .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+        .then(function (data) {
+          if (data && Array.isArray(data.events)) state.events = data.events;
+          if (data && data.settings) state.settings = data.settings;
+          applyAccent();
+          tick();
+          if (state.view === "calendar") renderCalendar();
+        })
+        .catch(function (err) { console.warn("fetch failed:", err); });
+    }
+    var pollTimer = null;
+    function startPolling() { stopPolling(); pollTimer = setInterval(fetchData, POLL_MS); }
+    function stopPolling() { if (pollTimer) { clearInterval(pollTimer); pollTimer = null; } }
+    document.addEventListener("visibilitychange", function () { if (document.hidden) stopPolling(); else { fetchData(); startPolling(); } });
+    window.addEventListener("focus", function () { if (!document.hidden) fetchData(); });
+
+    // =========================================================
+    // Toast
+    // =========================================================
     var toastTimer = null;
     function showToast(msg, isErr) {
-      els.toast.textContent = msg;
-      els.toast.classList.toggle("err", !!isErr);
-      els.toast.classList.add("show");
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(function () { els.toast.classList.remove("show"); }, 3200);
+      var t = $("toast"); t.textContent = msg; t.classList.toggle("err", !!isErr); t.classList.add("show");
+      clearTimeout(toastTimer); toastTimer = setTimeout(function () { t.classList.remove("show"); }, 3000);
     }
 
-    // ---- wire up events ----
-    els.editBtn.addEventListener("click", openModal);
-    els.waitingSetBtn.addEventListener("click", openModal);
-    els.cancelBtn.addEventListener("click", closeModal);
-    els.editForm.addEventListener("submit", saveEvent);
-    els.fTitle.addEventListener("input", updateCounters);
-    els.fNote.addEventListener("input", updateCounters);
-    els.modalBackdrop.addEventListener("click", function (e) {
-      if (e.target === els.modalBackdrop) closeModal();
+    // =========================================================
+    // Wire up
+    // =========================================================
+    document.querySelectorAll(".navbtn").forEach(function (b) { b.addEventListener("click", function () { setView(this.getAttribute("data-view")); }); });
+    $("fabAdd").addEventListener("click", function () { openEventModal(null); });
+    $("waitingSetBtn").addEventListener("click", function () { openEventModal(null); });
+    $("heroEdit").addEventListener("click", function () { var ev = heroEvent(); if (ev) openEventModal(ev); });
+    $("heroIcs").addEventListener("click", function () { var ev = heroEvent(); if (ev) { downloadICS([ev], slug(ev.title) + ".ics"); showToast("Calendar file downloaded 📅"); } });
+
+    $("calPrev").addEventListener("click", function () { shiftMonth(-1); });
+    $("calNext").addEventListener("click", function () { shiftMonth(1); });
+    $("calToday").addEventListener("click", calToToday);
+
+    $("eventForm").addEventListener("submit", saveEvent);
+    $("eventCancel").addEventListener("click", closeEventModal);
+    $("eventDelete").addEventListener("click", deleteEvent);
+    $("eventIcs").addEventListener("click", function () {
+      var res = collectEventFromForm(); if (res.error) { $("eventError").textContent = res.error; return; }
+      var ev = res.event; ev.id = state.editingId || newLocalId();
+      downloadICS([ev], slug(ev.title) + ".ics"); showToast("Calendar file downloaded 📅");
     });
+    $("fAllDay").addEventListener("change", syncAllDayUI);
+    $("fHasEnd").addEventListener("change", syncEndUI);
+    $("fTitle").addEventListener("input", updateCounters);
+    $("fNote").addEventListener("input", updateCounters);
+    $("eventBackdrop").addEventListener("click", function (e) { if (e.target === this) closeEventModal(); });
+
+    $("dayClose").addEventListener("click", closeDayModal);
+    $("dayAdd").addEventListener("click", function () { var d = dayModalDate; closeDayModal(); openEventModal({ startDate: d }); });
+    $("dayBackdrop").addEventListener("click", function (e) { if (e.target === this) closeDayModal(); });
+
     document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && els.modalBackdrop.classList.contains("open")) closeModal();
+      if (e.key === "Escape") {
+        if ($("eventBackdrop").classList.contains("open")) closeEventModal();
+        else if ($("dayBackdrop").classList.contains("open")) closeDayModal();
+      }
+    });
+
+    document.querySelectorAll("#swatches .swatch").forEach(function (s) {
+      s.addEventListener("click", function () { var c = this.getAttribute("data-c"); $("setAccentCustom").value = c; markSwatch(c); });
+    });
+    $("setAccentCustom").addEventListener("input", function () { markSwatch(this.value); });
+    $("setSave").addEventListener("click", saveSettings);
+    $("setDownloadAll").addEventListener("click", function () {
+      if (!state.events.length) { showToast("No events to download yet", true); return; }
+      downloadICS(state.events, "nikki-nate-events.ics"); showToast("All events downloaded 📅");
     });
 
     // =========================================================
     // Boot
     // =========================================================
-    tickTimer = setInterval(tick, 1000);
+    calToToday();
+    setInterval(tick, 1000);
     fetchData().then(startPolling);
   })();
   </script>

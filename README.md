@@ -1,48 +1,58 @@
 # nikki-countdown 💕
 
-A tiny, cute website that counts down (days / hours / minutes / seconds) to the
-next time Nikki and I see each other. Either of us can update the date, time,
-activity, and a short note from any device — no login — and the other device
-picks up the change within ~60 seconds.
+A cute website that counts down to the next time Nikki & Nate see each other —
+now with a shared calendar of all our plans. Either of us can add or edit events
+from any device (no login); the other device picks up changes within ~60 seconds.
 
-## How it works
+## Features
 
-- **`index.html`** — one file, vanilla HTML/CSS/JS, no build step. The countdown
-  ticks locally every second (computed from the target timestamp, so it never
-  drifts). It fetches the event on load, then every 60s, and pauses while the
-  tab is hidden.
-- **`api/hangout.js`** — a Vercel serverless function with two methods:
-  - `GET /api/hangout` → returns the current event JSON.
-  - `POST /api/hangout` → validates and saves it (no auth).
-- **Storage** — a single Upstash Redis key, `hangout`, holding:
-  ```json
-  {
-    "title": "Dinner at Bestia",
-    "note": "can't wait",
-    "datetime": "2026-08-01T19:30:00-07:00",
-    "updatedAt": 1753500000000
-  }
-  ```
-  `datetime` is stored as an ISO string with timezone offset so it renders
-  correctly on any device. The edit form interprets entered date/time as
-  Los Angeles time (America/Los_Angeles).
+- **Live countdown** to the next upcoming event (days / hours / minutes /
+  seconds), recomputed from the target each tick so it never drifts.
+- **Multiple events** with title, **location**, note, and time.
+- **All-day & multi-day** events.
+- **Calendar view** — a month grid (scroll by month) with event dots, plus a
+  day view and a month event list.
+- **Downloadable `.ics`** calendar invites — per event or all at once — that
+  import into Google / Apple / Outlook calendars.
+- **Settings** — your names, time zone, and accent color (synced across devices).
+- **Celebration state** when an event starts (floating hearts) and a **waiting**
+  state when nothing's planned.
 
-## States
+## Tech
 
-- **Counting down** — big live countdown + date/time + activity + note.
-- **It's time!** — at zero, a celebration with confetti/hearts.
-- **Waiting** — if the event is in the past and none is set, a sweet placeholder
-  prompting a new date.
+- One `index.html` — vanilla HTML/CSS/JS, **no build step**.
+- **`api/events.js`** — a single Vercel serverless function:
+  - `GET /api/events` → `{ events: [...], settings: {...} }`
+  - `POST /api/events` with `{ action }`:
+    - `upsert-event` `{ event }` — create/update (server-side read-modify-write
+      so two devices don't clobber each other)
+    - `delete-event` `{ id }`
+    - `save-settings` `{ settings }`
+- **Storage** — Upstash Redis (`@upstash/redis`), keys `events` and `settings`.
+  Credentials come from the Vercel Upstash Marketplace integration
+  (`UPSTASH_REDIS_REST_*` or `KV_REST_API_*`, both supported). The old
+  single-event `hangout` key is migrated automatically on first load.
 
-## Deploy
+## Data model
 
-1. Push to GitHub.
-2. Import the repo in Vercel (zero-config: static `index.html` + `/api`).
-3. Add the **Upstash Redis** integration from the Vercel Marketplace (free tier).
-   It auto-injects `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN`.
-4. Open the deployed URL and set your first hangout via the ✎ edit button.
+```json
+{
+  "id": "uuid",
+  "title": "Dinner at Bestia",
+  "location": "2121 E 7th Pl, Los Angeles",
+  "note": "can't wait",
+  "allDay": false,
+  "start": "2026-08-01T02:30:00.000Z",
+  "end": null,
+  "updatedAt": 1753500000000
+}
+```
+
+Datetimes are stored as UTC ISO strings; the form interprets and displays them
+in the configured time zone (default America/Los_Angeles).
 
 ## Cost
 
-Vercel Hobby + Upstash free tier. Roughly one Redis read per minute per open
-tab, no cron, no websockets — effectively $0.
+Vercel Hobby + Upstash free tier. The countdown ticks locally; the app fetches
+once on load and every 60s (paused when the tab is hidden), so it's ~1 read per
+minute per open tab — effectively $0.
