@@ -3,9 +3,13 @@ import { Redis } from "@upstash/redis";
 // Single Redis key holding the current hangout event.
 const KEY = "hangout";
 
-// The Vercel Upstash Marketplace integration injects these automatically:
-//   UPSTASH_REDIS_REST_URL / UPSTASH_REDIS_REST_TOKEN
-const redis = Redis.fromEnv();
+// The Vercel Upstash Marketplace integration auto-injects the connection
+// credentials. Depending on the integration version they're named either
+// UPSTASH_REDIS_REST_* or KV_REST_API_* — support both so it "just works".
+const redis = new Redis({
+  url: process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN,
+});
 
 // Field limits so nobody can stuff junk into Redis.
 const MAX_TITLE = 120;
